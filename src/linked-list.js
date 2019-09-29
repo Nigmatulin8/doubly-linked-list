@@ -64,8 +64,9 @@ class LinkedList {
             }
 
             this.length++;
-            return this;
         }
+
+        return this;
     }
 
     isEmpty() {
@@ -82,19 +83,20 @@ class LinkedList {
 
     deleteAt(index) {
         let node = this._head;
-        let nextNode = null;
-        let prevNode = null;
+
         this.length--;
 
-        for(let i = 0; i < index; i++) {
-            nextNode = node.next;
-            prevNode = node.prev;
-
+        for(let i = 0; i < index; i++) { 
             node = node.next;
         }
 
-        prevNode.next = nextNode;
-        nextNode.prev = node.prev;
+        if(node.prev !== null) {
+            node.prev.next = node.next;
+        }
+
+        if(node.next !== null) {
+            node.next.prev = node.prev;
+        }
 
         return this;
     }
